@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { Route, Router } from 'react-router-dom'
+import { v4 as uuid } from 'uuid'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from "./components/Pages/Home"
+import { Decks, Commander, Standard, Modern } from "./components/Pages/Decks"
+import SignUp from './components/auth/SignUp'
+import SignIn from './components/auth/SignIn'
+
+
+const App = (props) => {
+  const [user, setUser] = useState(null)
+  const [msgAlert, setMsgAlert] = useState([])
+
+  msgAlert = ({ heading, message, variant }) => {
+	// gives me a uuid and assigns it to id
+	const id = uuid()
+	setState((state) => {
+		return {
+			// taking all the messages that we have and adding the new one
+			msgAlerts: [...state.msgAlerts, { heading, message, variant, id }],
+		}
+	})
 }
 
-export default App;
+return (
+	<>
+		<Router>
+			<Route path='/' element={<Home />} />
+			<Route path='/decks' element={<Decks />} />
+			<Route path='/decks/commander' element={<Commander />} />
+			<Route path='/decks/standard' element={<Standard />} />
+			<Route path='/decks/modern' element={<Modern />} />
+			<Route path='/sign-up' render={() => (<SignUp msgAlert={msgAlert} setUser={setUser} />)}
+			/>
+			<Route
+				path='/sign-in'
+				render={() => (
+					<SignIn msgAlert={msgAlert} setUser={setUser} />
+				)}
+			/>
+		</Router>
+	</>
+)
+}
+
+export default App
