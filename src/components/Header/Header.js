@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link, NavLink } from 'react-router-dom'
 
+// since these routes are no longer in app they will error out if you click on these links
 const authenticatedOptions = (
 	<Fragment>
 		<NavLink to='/change-password' className='nav-link'>

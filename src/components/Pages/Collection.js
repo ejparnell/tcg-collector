@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+// this file does not exist wee have the api/apiConfig file that you can use for this
 import apiUrl from '../../../API-Management/config'
 import axios from 'axios'
 
@@ -14,12 +15,13 @@ const Collection = props => {
   // })
   useEffect(() => {
     axios(`${apiUrl}/collection/show`)
-    // .then(res => setBook({ book: res.data.book }))
+      // .then(res => setBook({ book: res.data.book }))
       .then((res) => setCollectionId(res.data._id))
       .catch(console.error)
   }, [])
 
   const getCollection = () => {
+    // call should be in an api directory/file and using the apiURL config
     axios({
       url: 'https://evening-ocean-06506.herokuapp.com/cardsid/61cb40765540430db1d5e0b5',
       method: 'GET'
